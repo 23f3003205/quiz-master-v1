@@ -1,2 +1,90 @@
+{% extends 'base_layout.html' %}
 
+{% block title %} Subjects {% endblock %}
 
+{% block admin_dashboard %}
+<div class="container mt-4">
+    <h2 class="mb-3"> Subjects </h2>
+    <div class="row">
+        <!-- {% for subject in subjects %} -->
+        <div class="col-md-6 col-sm-12">
+            <div class="card mb-3">
+                <div class="card-header text-center">
+                    <h5>{{subject.name}}</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="bg-purple text-white">
+                                <th>Chapter Name</th>
+                                <th>No. of Questions</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- {% for chapter in subject.chapters %} -->
+                            <tr>
+                                <td>{{ chapter.name }}</td>
+                                <td>{{ chapter.questions }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <!-- {% endfor %} -->
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary">+ Add chapter</button>
+                </div>
+            </div>
+        </div>
+        <!-- {% endfor %} -->
+    </div>
+    <div class="text-end">
+        <button class="btn btn-primary">+ Add Subject</button>
+    </div> 
+</div>
+{% endblock %}
+
+{% block user_dashboard %}
+<div class="container mt-4">
+    <h3 class="mb-3" style="color:red"> Upcoming Quizzes </h3>
+    <div class="row">
+        <div class="col-ls-6 col-sm-12">
+            <div class="card mb-3">
+                <div class="card-header text-center">
+                    <h5> Quizzes</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="table-primary text-white">
+                                <th>ID</th>
+                                <th>No. of Questions</th>
+                                <th>Date</th>
+                                <th>Duration</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- {% for chapter in subject.chapters %} -->
+                            <tr>
+                                <td>{{ chapter.Id }}</td>
+                                <td>{{ chapter.questions }}</td>
+                                <td>{{chapter.date}}</td>
+                                <td>{{chapter.duration}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">View</button>
+                                    <button class="btn btn-sm btn-success">Start</button>
+                                </td>
+                            </tr>
+                            <!-- {% endfor %} -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Chapter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .login-container{
+            width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <h2 class="heading">Add new Chapter</h2>
+            <p class="light-text">Please Enter Details</p>
+            <form action="{{ url_for('admin.add_chapter', subject_id=subject.id) }}" method="POST" >
+    
+                <div class="mb-3">
+                    <label for="chapter_name" class="form-label">Chapter Name</label>
+                    <input type="text" class="form-control" id="chapter_name" placeholder="chapter_name" name="chapter_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="questions" class="form-label">No. of Questions</label>
+                    <input type="number" id="questions" class="form-control w-25" name="no_questions" required min="1" placeholder="Enter">
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary me-5">Save</button>
+                    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary ">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add new Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .login-container {
+            width: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-container">
+            <h2 class="heading">Add new Quiz</h2>
+            <p class="light-text">Please Enter Details</p>
+            <form href="{{ url_for('admin.add_quiz', chapter_id=chapter.id) }}" method="POST">
+    
+                <div class="mb-3">
+                    <label for="duration" class="form-label">Duration (Minutes):</label>
+                    <div class="input-group w-50">
+                        <input type="number" id="duration" class="form-control" name="duration" min="1" required
+                            placeholder="Minutes">
+                        <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDate" class="form-label">Date </label>
+                    <input type="date" id="inputDate" class="form-control" name="date">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary me-5">Save</button>
+                    <a href="{{ url_for('admin.quiz_management', chapter_id=chapter_id) }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

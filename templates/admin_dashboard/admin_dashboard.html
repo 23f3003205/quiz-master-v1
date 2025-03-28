@@ -1,0 +1,48 @@
+{% extends 'base_layout/base_layout.html' %}
+
+{% block title %} Subjects {% endblock %}
+
+{% block admin_dashboard %}
+<div class="container mt-4">
+    <h2 class="mb-3"> Subjects </h2>
+    <div class="row">
+        {% for subject in subjects %}
+        <div class="col-md-6 col-sm-12">
+            <div class="card mb-3">
+                <div class="card-header text-center">
+                    <h5>{{subject.sub_name}}</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="bg-purple text-white">
+                                <th>Chapter Name</th>
+                                <th>No. of Questions</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for chapter in subject.chapters %}
+                            <tr>
+                                <td>{{ chapter.name }}</td>
+                                <td>{{ chapter.no_questions }}</td>
+                                <td>
+                                    <a href="{{ url_for('admin.quiz_management', chapter_id=chapter.id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="{{ url_for('admin.delete_chapter', chapter_id=chapter.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <a href="{{ url_for('admin.add_chapter', subject_id=subject.id) }}" class="btn btn-primary">+ Add chapter</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-end">
+        <a href="{{ url_for('admin.add_subject') }}" class="btn btn-primary">+ Add Subject</a>
+    </div> 
+</div>
+{% endblock %}
+

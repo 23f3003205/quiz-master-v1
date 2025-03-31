@@ -24,30 +24,28 @@ class Chapter(db.Model):
     subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     no_questions = db.Column(db.Integer, nullable=False)
-    quizzes = db.relationship('Quiz', backref='chapter', lazy=True)
-
-class Quiz(db.Model):
-    __tablename__ = 'quiz'
-    id = db.Column(db.Integer, primary_key=True)
-    chapter_id = db.Column(db.Integer, db.ForeignKey('chapter.id'), nullable=False)
-    date = db.Column(db.String, nullable=False)
-    duration = db.Column(db.Integer, nullable=False)  # in minutes
-    questions = db.relationship('Questions', backref='quiz', lazy=True)
+    # One-to-Many relationship with Questions
+    questions = db.relationship('Questions', backref='chapter', lazy=True)
 
 class Questions(db.Model):
     __tablename__ = 'questions'
-    id = db.Column(db.Integer, primary_key=True)
-    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
+    chapter_id = db.Column(db.Integer, db.ForeignKey('chapter.id'), primary_key=True, nullable=False)
+    question_number = db.Column(db.Integer, primary_key=True, nullable=False)  # Ensure uniqueness within chapter
     que_statement = db.Column(db.Text, nullable=False)
     que_title = db.Column(db.String(255), nullable=False)
-    options_1 = db.Column(db.Text, nullable=False) 
-    options_2 = db.Column(db.Text, nullable=False)
-    options_3 = db.Column(db.Text, nullable=False)
-    options_4 = db.Column(db.Text, nullable=False)
-    correct_option = db.Column(db.String(100), nullable=False)
+    option_1 = db.Column(db.Text, nullable=False)
+    option_2 = db.Column(db.Text, nullable=False)
+    option_3 = db.Column(db.Text, nullable=False)
+    option_4 = db.Column(db.Text, nullable=False)
+    correct_option = db.Column(db.String(100), nullable=False)  # Ensure this matches the radio button values
 
 class Score(db.Model):
     __tablename__ = 'score'
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True, nullable=False)
-    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), primary_key=True, nullable=False)
+    chapter_id = db.Column(db.Integer, db.ForeignKey('chapter.id'), primary_key=True, nullable=False)
+    attempt_number = db.Column(db.Integer, primary_key=True, nullable=False)
     total_scored = db.Column(db.Integer, nullable=False)
+
+    # Relationships
+    chapter = db.relationship('Chapter', backref=db.backref('scores', lazy=True))
+    user = db.relationship('User', backref=db.backref('scores', lazy=True))  # Ensure lazy loading

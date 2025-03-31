@@ -1,17 +1,17 @@
-{% extends 'base_layout.html' %}
+{% extends 'base_layout/base_admin.html' %}
 
 {% block title %} Quizzes {% endblock %}
 
 
-{% block content %}
+{% block quizzes %}
 <div class="container mt-4">
     <h2 class="mb-3"> Quizzes </h2>
     <div class="row">
-        {% for quiz in quizzes %}
+        {% for chapter in chapters %}
         <div class="col-md-6 col-sm-12">
             <div class="card mb-3">
                 <div class="card-header text-center">
-                    <h5>{{quiz.quiz_name}}</h5>
+                    <h5>{{chapter.name}}</h5>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -23,26 +23,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for que in quiz.questions %}
+                            {% for que in chapter.questions %}
                             <tr>
-                                <td>{{ que.id }}</td>
+                                <td>{{ que.question_number }}</td>
                                 <td>{{ que.que_title }}</td>
                                 <td>
-                                    <a class="btn btn-sm btn-primary">Edit</a>
-                                    <a class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="{{ url_for('admin.edit_question', chapter_id=que.chapter_id, question_number=que.question_number) }}" class="btn btn-sm btn-primary">Edit</a>
+                                    <form action="{{ url_for('admin.delete_question', chapter_id=que.chapter_id, question_number=que.question_number) }}" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
-                    <a href="{{ url_for('admin.add_question', quiz_id=quiz.id) }}" class="btn btn-primary">+ Add Que.</a>
+                    <a href="{{ url_for('admin.add_question',chapter_id=chapter.id) }}" class="btn btn-primary">+ Add Question</a>
                 </div>
             </div>
         </div>
         {% endfor %}
-    </div>
-    <div class="text-end">
-        <a href="{{ url_for('admin.add_quiz', chapter_id=chapter.id) }}" class="btn btn-primary">+ Add New Quiz</a>
     </div>
 </div>
 {% endblock %}

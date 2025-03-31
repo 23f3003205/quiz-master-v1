@@ -1,4 +1,4 @@
-{% extends 'base_layout/base_layout.html' %}
+{% extends 'base_layout/base_admin.html' %}
 
 {% block title %} Subjects {% endblock %}
 
@@ -27,8 +27,10 @@
                                 <td>{{ chapter.name }}</td>
                                 <td>{{ chapter.no_questions }}</td>
                                 <td>
-                                    <a href="{{ url_for('admin.quiz_management', chapter_id=chapter.id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                    <a href="{{ url_for('admin.delete_chapter', chapter_id=chapter.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="{{ url_for('admin.edit_chapter', chapter_id=chapter.id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                    <form action="{{ url_for('admin.delete_chapter', chapter_id=chapter.id) }}" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             {% endfor %}

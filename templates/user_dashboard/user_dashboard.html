@@ -1,10 +1,10 @@
-{% extends 'base_layout.html' %}
+{% extends 'base_layout/base_user.html' %}
 
 {% block user_dashboard %}
 <div class="container mt-4">
-    <h3 class="mb-3" style="color:red"> Upcoming Quizzes </h3>
+    <h3 class="mb-3 text-danger">Upcoming Quizzes</h3>
     <div class="row">
-        <div class="col-ls-6 col-sm-12">
+        <div class="col-lg-6 col-sm-12">
             <div class="card mb-3">
                 <div class="card-header text-center">
                     <h5> Quizzes</h5>
@@ -15,24 +15,27 @@
                             <tr class="table-primary text-white">
                                 <th>ID</th>
                                 <th>Chapter</th>
-                                <th>Date</th>
-                                <th>Duration</th>
+                                <th>No. of Question</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for quiz in quizzes%}
-                            <tr>
-                                <td>{{ quiz.Id }}</td>
-                                <td>{{ quiz.chapter_id }}</td>
-                                <td>{{quiz.date}}</td>
-                                <td>{{quiz.duration}}</td>
-                                <td>
-                                    <a  href='#'  class="btn btn-sm btn-primary">View</a>
-                                    <a href="#" class="btn btn-sm btn-success">Start</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
+                            {% if chapters %}
+                                {% for chapter in chapters %}
+                                <tr>
+                                    <td>{{ chapter.id }}</td>
+                                    <td>{{ chapter.name }}</td>
+                                    <td>{{ chapter.no_questions }}</td>
+                                    <td>
+                                        <a href="{{ url_for('user.start_quiz', chapter_id=chapter.id) }}" class="btn btn-sm btn-success">Start</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" class="text-center">No quizzes available.</td>
+                                </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -40,5 +43,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

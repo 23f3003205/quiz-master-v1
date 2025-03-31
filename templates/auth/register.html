@@ -13,16 +13,9 @@
             <h2 class="heading">Welcome to Quiz Master</h2>
             <h2 class="text-center"><b>Register</b></h2>
             <p class="light-text">Please Enter Your Details</p>
-            <!-- {% if messages %}
-                <div class="alert alert-danger">
-                    {% for category, message in messages %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            {% endwith %} --> 
+            
             <form action="{{ url_for('auth.register') }}" method="POST">
-                <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
+        
                 <div class="mb-3">
                     <label for="InputEmail" class="form-label">Email (Username)</label>
                     <input type="text" class="form-control" id="InputEmail" placeholder="abc123@example.com" name="username" required>

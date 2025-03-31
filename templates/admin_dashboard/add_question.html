@@ -31,60 +31,60 @@
 <body>
     <div class="container">
         <div class="login-container">
-            <h2 class="heading">Add new Question</h2>
+            <h2 class="heading">Add new Question to Quiz : {{chapter.name}}</h2>
             <p class="light-text">Please Enter Que. Details</p>
-            <form action="{{ url_for('admin.add_question', quiz_id=quiz_id) }}" method="POST">
+            <form action="{{ url_for('admin.add_question' , chapter_id=chapter.id) }}" method="POST">
         
                 <div class="mb-3">
-                    <label for="title" class="form-label">Que. Title</label>
-                    <input type="text" id="title" class="form-control" name="title" required>
+                    <label for="que_title" class="form-label">Que. Title</label>
+                    <input type="text" id="que_title" class="form-control" name="que_title" required>
                 </div>
                 <div class="mb-3">
-                    <label for="Que_statement" class="form-label"><b>Que. Statement</b></label>
-                    <textarea class="form-control" id="statement" rows="2"></textarea>
+                    <label for="que_statement" class="form-label"><b>Que. Statement</b></label>
+                    <textarea class="form-control" id="que_statement" name="que_statement" rows="2" required></textarea>
                 </div>
                 <div class="options-container">
                     <h5 style="color: blue;">Single Option Correct</h5>
                     <!-- Options Section -->
                         <!-- Option 1 -->
                         <div class="d-flex align-items-center mb-2">
-                            <label for="option1" class="me-2" style="width: 100px;">Option 1:</label>
-                            <input type="text" id="option_a" class="form-control" name="option_a" required>
+                            <label for="option_1" class="me-2" style="width: 100px;">Option 1:</label>
+                            <input type="text" id="option_1" class="form-control" name="option_1" required>
                         </div>
 
                         <!-- Option 2 -->
                         <div class="d-flex align-items-center mb-2">
-                            <label for="option2" class="me-2" style="width: 100px;">Option 2:</label>
-                            <input type="text" id="option_b" class="form-control" name="option_b" required>
+                            <label for="option_2" class="me-2" style="width: 100px;">Option 2:</label>
+                            <input type="text" id="option_2" class="form-control" name="option_2" required>
                         </div>
 
                         <!-- Option 3 -->
                         <div class="d-flex align-items-center mb-2">
-                            <label for="option3" class="me-2" style="width: 100px;">Option 3:</label>
-                            <input type="text" id="option_c" class="form-control" name="option_c" required>
+                            <label for="option_3" class="me-2" style="width: 100px;">Option 3:</label>
+                            <input type="text" id="option_3" class="form-control" name="option_3" required>
                         </div>
 
                         <!-- Option 4 -->
                         <div class="d-flex align-items-center mb-2">
-                            <label for="option4" class="me-2" style="width: 100px;">Option 4:</label>
-                            <input type="text" id="option_d" class="form-control" name="option_d" required>
+                            <label for="option_4" class="me-2" style="width: 100px;">Option 4:</label>
+                            <input type="text" id="option_4" class="form-control" name="option_4" required>
                         </div>
 
                         <!-- Correct Option Selection -->
                         <div class="d-flex align-items-center">
                             <label for="correct_option" class="me-2" style="width: 100px;">Correct Option:</label>
                             <select id="correct_option" class="form-control" style="background-color: #90ee90;" name="correct_option">
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                                <option value="4">Option 4</option>
+                                <option value="option_1">Option 1</option>
+                                <option value="option_2">Option 2</option>
+                                <option value="option_3">Option 3</option>
+                                <option value="option_4">Option 4</option>
                             </select>
                         </div>
 
 
                     <div class="text-center mt-3">
                         <button type="submit" class="btn btn-primary me-5">Save</button>
-                        <a href="{{ url_for('admin.quiz_management', chapter_id=chapter_id) }}" class="btn btn-secondary ">Cancel</a>
+                        <a href="{{ url_for('admin.quiz_management') }}" class="btn btn-secondary ">Cancel</a>
                     </div>
             </form>
         </div>

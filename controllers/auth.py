@@ -11,10 +11,13 @@ def login():
         user = User.query.filter_by(username=username).first()
 
         if user and user.password == password:
-            session['user_id'] = user.id
+            session['user_id'] = user.id  # Store user_id in session
             session['role'] = user.role
             flash('Login successful!', 'success')
-            return redirect(url_for('admin.dashboard') if user.role == 'admin' else url_for('user.dashboard'))
+            if user.role == 'admin':
+                return redirect(url_for('admin.dashboard'))  # Matches '/admin/dashboard'
+            else:
+                return redirect(url_for('user.dashboard'))  # Matches '/user/dashboard'
         else:
             flash('Invalid username or password', 'danger')
 
